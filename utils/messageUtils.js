@@ -21,15 +21,29 @@ export const isValidURL = (url) => {
   }
 };
 
-export const validateAllURLs = (URLs) => {
-  let count = 0;
-  
+export const validateAllURLs = (URLs, feature) => {
+  let invalid = 0;
+  let videos = 0;
+
   URLs.map((url) => {
     if (!isValidURL(url)) {
-      count += 1;
+      invalid += 1;
+    }
+    if (!feature && isVideo(url)) {
+      videos += 1;
     }
   });
 
-  if (count > 0) return false;
-  else return true;
+  if (videos > 0) {
+    if (invalid > 0) {
+      return { success: false, error: "Invalid Url(s)" };
+    } else {
+      return { success: false, error: "Sending videos is disabled" };
+    }
+  } else return { success: true };
+};
+
+export const isVideo = (url) => {
+  const videoRegex = /\.(mp4|avi|mov|wmv|flv|mkv|webm)$/i;
+  return videoRegex.test(url);
 };

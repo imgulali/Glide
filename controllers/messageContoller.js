@@ -5,6 +5,7 @@ import {
   validateAllURLs,
   validatePhoneNumber,
 } from "../utils/messageUtils.js";
+import { features } from "../config/features.js";
 
 export const sendMessage = async (req, res, next) => {
   try {
@@ -17,17 +18,21 @@ export const sendMessage = async (req, res, next) => {
       });
     }
 
-    if ((!message || message.length === 0) && (!medias || medias.length === 0)) {
+    if (
+      (!message || message.length === 0) &&
+      (!medias || medias.length === 0)
+    ) {
       return res.status(400).json({
         success: false,
         message: "Message can't be null",
       });
     }
 
-    if (!validateAllURLs(medias)) {
+    const validateUrls = validateAllURLs(medias, features.sendVideos);
+    if (!validateUrls.success) {
       return res.status(400).json({
         success: false,
-        message: "Invalid Media Url(s)",
+        message: validateUrls.error,
       });
     }
 
@@ -59,10 +64,12 @@ export const sendMessage = async (req, res, next) => {
     if (medias) {
       for (const media of medias) {
         sendMessagePromises.push(
-          whatsapp.MessageMedia.fromUrl(media)
+          whatsapp.MessageMedia.fromUrl(media, {
+            unsafeMime: features.unsafeMime,
+          })
             .then((mediaMessage) => bot.sendMessage(`${phone}`, mediaMessage))
             .catch((err) => {
-              next(err)
+              next(err);
             })
         );
       }

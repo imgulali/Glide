@@ -86,24 +86,20 @@ After that the project will automaticaly connect using the session in ".wwebjs_a
 ```
 
 ## Send Videos
-If you want to send videos over the api you will need to uncomment the following code in
+If you want to send videos over the api you will need to enable it in the features. **Enabled by default**
 
 
 #### File:
 ```bash
-  config/bot.js
+  features.js
 ```
 
 
 #### Code:
-```javascript
-//  Comment "puppeteer" if you don't want to send Videos using the api.
-//  Sending videos require a Google Chrome Service so, The address to Chrome exeuctable is used
-
-puppeteer: {
-    executablePath:
-      `${Chrome_Path}`,
-  },
+```json
+{
+    "sendVideos": true
+}
 ```
 
 
@@ -119,19 +115,14 @@ To run this on a server you will need to **disable video sharing** because that 
 
 #### File
 ```bash
-  config/bot.js
+  features.json
 ```
-Remove or comment out this code
 
 #### Code:
-```javascript
-//  Comment "puppeteer" if you don't want to send Videos using the api.
-//  Sending videos require a Google Chrome Service so, The address to Chrome exeuctable is used
-
-puppeteer: {
-    executablePath:
-      `${Chrome_Path}`,
-  },
+```json
+{
+    "sendVideos": false
+}
 ```
 ## FAQ
 
@@ -144,18 +135,19 @@ This error happens when there is URL which is not direct to the content or media
 https://i.ibb.co/LYjgyCs/hello.jpg
 ```
 
-If anyway you want to send that content over the api. Change the following code at 
+If anyway you want to send that content over the api. Enable it in the features.
 
 #### File:
 ```bash
-controllers/messageController.js
+features.json
 ```
 
 
 #### Code:
-```javascript
-//At line 62 replace with this
-whatsapp.MessageMedia.fromUrl(media, { unsafeMime: true })
+```json
+{
+    "unsafeMime": true
+}
 ```
 ## License
 
