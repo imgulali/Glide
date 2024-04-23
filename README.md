@@ -85,25 +85,55 @@ After that the project will automaticaly connect using the session in ".wwebjs_a
 }
 ```
 
-## Send Videos
-If you want to send videos over the api you will need to enable it in the features. **Enabled by default**
+## Settings.json
+You can edit settings related to the project here. You can change the PORT, and chrome executable path with respect to your computer. Features ar discussed later in the docs.
+
+***Warning**: Donot remove any setting or delete this file. Just change the settings.*
 
 
 #### File:
 ```bash
-  features.js
+  settings.json
 ```
 
 
 #### Code:
 ```json
 {
-    "sendVideos": true
+    "config":{
+        "PORT": 4500,
+        "chromePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    },
+    
+    "features": {
+        "sendVideos": true,
+        "unsafeMime": true
+    }
 }
 ```
 
 
-***Note:** Also verify the path to the Chrome executable in **config/constants.js**. Which by default is:*
+## Send Videos
+If you want to send videos over the api you will need to enable it in the settings. **Enabled by default**
+
+
+#### File:
+```bash
+  settings.js
+```
+
+
+#### Code:
+```json
+{
+    "features": {
+        "sendVideos": true
+    }
+}
+```
+
+
+***Note:** Also verify the path to the Chrome executable, which by default is:*
 
 ```bash
   C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe
@@ -115,13 +145,15 @@ To run this on a server you will need to **disable video sharing** because that 
 
 #### File
 ```bash
-  features.json
+  settings.json
 ```
 
 #### Code:
 ```json
 {
-    "sendVideos": false
+    "features": {
+        "sendVideos": false
+    }
 }
 ```
 ## FAQ
@@ -135,18 +167,20 @@ This error happens when there is URL which is not direct to the content or media
 https://i.ibb.co/LYjgyCs/hello.jpg
 ```
 
-If anyway you want to send that content over the api. Enable it in the features.
+If anyway you want to send that content over the api. Enable it in the settings.
 
 #### File:
 ```bash
-features.json
+settings.json
 ```
 
 
 #### Code:
 ```json
 {
-    "unsafeMime": true
+    "features": {
+        "unsafeMime": true
+    }
 }
 ```
 ## License
