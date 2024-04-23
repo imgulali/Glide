@@ -5,7 +5,7 @@ import {
   validateAllURLs,
   validatePhoneNumber,
 } from "../utils/messageUtils.js";
-import { features } from "../config/features.js";
+import { sendVideos, unsafeMime } from "../config/constants.js";
 
 export const sendMessage = async (req, res, next) => {
   try {
@@ -29,7 +29,7 @@ export const sendMessage = async (req, res, next) => {
     }
 
     if (medias && medias.length !== 0) {
-      const validateUrls = validateAllURLs(medias, features.sendVideos);
+      const validateUrls = validateAllURLs(medias, sendVideos);
       if (!validateUrls.success) {
         return res.status(400).json({
           success: false,
@@ -67,7 +67,7 @@ export const sendMessage = async (req, res, next) => {
       for (const media of medias) {
         sendMessagePromises.push(
           whatsapp.MessageMedia.fromUrl(media, {
-            unsafeMime: features.unsafeMime,
+            unsafeMime: unsafeMime,
           })
             .then((mediaMessage) => bot.sendMessage(`${phone}`, mediaMessage))
             .catch((err) => {

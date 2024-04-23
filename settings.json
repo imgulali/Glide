@@ -1,0 +1,11 @@
+{
+    "config":{
+        "PORT": 4500,
+        "chromePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    },
+    
+    "features": {
+        "sendVideos": true,
+        "unsafeMime": true
+    }
+}

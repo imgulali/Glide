@@ -1,7 +1,6 @@
 import whatsapp from "whatsapp-web.js";
 import qrcode from "qrcode-terminal";
-import { Chrome_Path } from "./constants.js";
-import { features } from "./features.js";
+import { chromePath, sendVideos } from "./constants.js";
 
 const { Client, LocalAuth } = whatsapp;
 
@@ -13,9 +12,9 @@ const baseConfig = {
   },
 };
 
-if (features.sendVideos) {
+if (sendVideos) {
   baseConfig.puppeteer = {
-    executablePath: `${Chrome_Path}`,
+    executablePath: `${chromePath}`,
   };
 };
 
@@ -25,7 +24,7 @@ bot.on("ready", () => {
   console.log("Connected Successfuly");
 });
 
-bot.on("qr", (qr) => {
+bot.on("qr", async(qr) => {
   qrcode.generate(qr, { small: true });
   console.log("⬆️  Scan this Qr Code using your WhatsApp");
   console.log("Or use this code to generate qr");
