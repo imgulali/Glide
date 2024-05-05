@@ -1,5 +1,5 @@
 {
-  "name": "stork",
+  "name": "glide",
   "version": "1.0.3",
   "description": "Send WhatsApp message using Strok Api",
   "type": "module",
