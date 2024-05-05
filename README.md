@@ -1,7 +1,7 @@
 
-# Stork
+# Glide
 
-Stork is WhatsApp api to send messages to users.
+Glide is WhatsApp api to send messages to users.
 
 ***Note:** This is an unofficial api. Use this responsibly*
 
@@ -11,13 +11,13 @@ Stork is WhatsApp api to send messages to users.
 Clone the project
 
 ```bash
-  git clone https://github.com/imgulali/stork
+  git clone https://github.com/imgulali/glide
 ```
 
 Go to the project directory
 
 ```bash
-  cd stork
+  cd glide
 ```
 
 Install dependencies
