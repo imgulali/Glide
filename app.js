@@ -13,7 +13,7 @@ app.use(json());
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.send(`<h1>Stork server is running</h1>`);
+  res.send(`<h1>Glide server is running</h1>`);
 });
 
 app.use("/message", messageRouter);
@@ -27,5 +27,5 @@ app.use((req, res, next) => {
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-  console.log(`Stork server running at port ${PORT}`);
+  console.log(`Glide server running at port ${PORT}`);
 });
